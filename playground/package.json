@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "devDependencies": {
-    "@uni-helper/mcp": "workspace:*"
+    "@uni-helper/ai-tools": "workspace:*",
+    "vite": "^5.2.12"
   }
 }

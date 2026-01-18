@@ -1,24 +1,12 @@
-# [WIP]uniapp MCP plugin
+# [WIP]UniAPP AI Tools
 
 ## 安装
 
 ```bash
-pnpm add @uni-helper/mcp -D
+pnpm add @uni-helper/ai-tools -D
 ```
 
 ## 配置
-
-在 `vite.config.ts` 中添加如下配置：
-
-```ts
-import mcp from '@uni-helper/mcp'
-import uni from '@uni-helper/plugin-uni'
-import { defineConfig } from 'vite'
-
-export default defineConfig({
-  plugins: [uni(), mcp()],
-})
-```
 
 ## 配置 MCP 服务器
 ```json
@@ -32,9 +20,9 @@ export default defineConfig({
 ```
 
 ## 注意如果使用pnpm，请在`pnpm-workspace.yaml`中添加如下配置：
-确保能正确构建`@uni-helper/mcp`插件
+确保能正确构建`@uni-helper/ai-tools`插件
 ```yaml
 onlyBuiltDependencies:
   - hnswlib-node
-  - '@uni-helper/mcp'
+  - '@uni-helper/ai-tools'
 ```

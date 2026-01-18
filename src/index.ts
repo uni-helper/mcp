@@ -1,32 +1,24 @@
-import type { Plugin } from 'vite'
-import type { UniMcpOptions } from './types'
-import process from 'node:process'
-import minimist from 'minimist'
+#!/usr/bin/env node
 
-import { searchForWorkspaceRoot } from 'vite'
-import { connectServer } from './mcpServer/connect'
-import { createMcpServer } from './mcpServer/server'
-import { updateConfigs } from './updateConfigs'
+import { Command } from 'commander'
+import { version } from '../package.json'
+import { mcp } from './mcp'
+import { skills } from './skills'
 
-export function isBuild() {
-  const args = minimist(process.argv.slice(2))
-  const isBuild = args._.includes('build')
-  return isBuild
+async function main() {
+  const program = new Command()
+    .name('@uni-helper/ai-tools')
+    .description('provide ai development experience for uniapp')
+    .version(
+      version || '1.0.0',
+      '-v, --version',
+      'display the version number',
+    )
+  program
+    .addCommand(mcp)
+    .addCommand(skills)
+
+  program.parse()
 }
 
-export default function uniMcp(options: UniMcpOptions = {}): Plugin | undefined {
-  if (isBuild())
-    return
-
-  return {
-    name: 'uni-mcp',
-    enforce: 'post',
-    async configResolved(config) {
-      const mcp = await createMcpServer(config, options)
-      const url = connectServer(mcp, options)
-
-      const root = searchForWorkspaceRoot(config.root)
-      await updateConfigs(root, url, options)
-    },
-  }
-}
+main()

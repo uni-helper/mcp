@@ -7,3 +7,6 @@ onlyBuiltDependencies:
   - esbuild
   - simple-git-hooks
   - hnswlib-node
+  - onnxruntime-node
+  - protobufjs
+  - sharp
