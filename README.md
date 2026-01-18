@@ -1,6 +1,6 @@
 # [WIP]UniAPP AI Tools
 
-缓慢随缘更新中，欢迎贡献自己的uniapp最佳实践贡献skills。
+缓慢随缘更新中，欢迎贡献你的 uniapp 最佳实践来完善 [skills](./src/skills/uniapp)。
 
 > 仅使用mcp可以安装下面文档使用。支持查询uniapp文档 `MCP + RAG`
 <details>
