@@ -5,7 +5,6 @@ import { HuggingFaceTransformersEmbeddings } from '@langchain/community/embeddin
 async function downloadModel() {
   env.version = 'master'
   env.remoteHost = 'https://www.modelscope.cn/models'
-  await new Promise(resolve => setTimeout(resolve, 1000))
   const embeddings = new HuggingFaceTransformersEmbeddings({
     model: 'onnx-community/Qwen3-Embedding-0.6B-ONNX',
     pretrainedOptions: {

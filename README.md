@@ -1,10 +1,8 @@
-# [WIP]UniAPP AI Tools
+# UniAPP MCP
 
-缓慢随缘更新中，欢迎贡献你的 uniapp 最佳实践来完善 [skills](./src/skills/uniapp)。
+> 访问[uni-helper/skills](https://github.com/uni-helper/skills)获取`skills`。
 
-> 仅使用 MCP 即可按下方文档安装。使用 `MCP + RAG` 方案来查询 uniapp 文档。
-<details>
-<summary>点击查看安装和配置</summary>
+使用 `MCP + RAG` 方案来查询 uniapp 文档。
 
 ## 安装
 
@@ -12,25 +10,11 @@
 pnpm add @uni-helper/mcp -D
 ```
 
-## 配置
-
-在 `vite.config.ts` 中添加如下配置：
-
-```ts
-import mcp from '@uni-helper/mcp'
-import uni from '@uni-helper/plugin-uni'
-import { defineConfig } from 'vite'
-
-export default defineConfig({
-  plugins: [uni(), mcp()],
-})
-```
-
 ## 配置 MCP 服务器
 ```json
 {
   "mcpServers": {
-    "uni": {
+    "uni-docs": {
       "url": "http://localhost:2515/mcp"
     }
   }
@@ -44,5 +28,3 @@ onlyBuiltDependencies:
   - hnswlib-node
   - '@uni-helper/mcp'
 ```
-
-</details>

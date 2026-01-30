@@ -4,7 +4,7 @@ export default defineConfig({
   entry: {
     index: 'src/index.ts',
   },
-  dts: true,
+  dts: false,
   fixedExtension: true,
   clean: true,
 })
