@@ -10,6 +10,7 @@
       "@/*": ["src/*"]
     },
     "resolveJsonModule": true,
+    "allowImportingTsExtensions": true,
     "strict": true,
     "strictNullChecks": true,
     "noEmit": true,

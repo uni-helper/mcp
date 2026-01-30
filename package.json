@@ -48,8 +48,9 @@
     "inspect": "mcp-inspector",
     "prepublishOnly": "pnpm build",
     "release": "bumpp",
+    "pull:repo": "node scripts/cli.ts",
     "test": "vitest",
-    "prepare": "simple-git-hooks",
+    "prepare": "simple-git-hooks && git submodule update --init --recursive",
     "postinstall": "node scripts/download-model.mjs"
   },
   "peerDependencies": {
@@ -74,6 +75,7 @@
   "devDependencies": {
     "@antfu/eslint-config": "^7.0.1",
     "@antfu/utils": "^9.3.0",
+    "@clack/prompts": "^1.0.0",
     "@langchain/core": "^1.1.15",
     "@langchain/ollama": "^1.2.0",
     "@langchain/textsplitters": "^1.0.1",
