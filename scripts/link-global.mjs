@@ -4,6 +4,10 @@ import process from 'node:process'
 import { fileURLToPath } from 'node:url'
 import which from 'which'
 
+if (process.env.CI) {
+  process.exit(0)
+}
+
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 
