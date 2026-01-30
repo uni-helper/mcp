@@ -5,7 +5,6 @@ export default antfu(
     type: 'lib',
     pnpm: false,
     ignores: [
-      'playground',
       '**/vectorStore/**',
     ],
     rules: {

@@ -1,6 +1,6 @@
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js'
 import { z } from 'zod'
-import { version } from '../../../package.json'
+import { version } from '../../package.json'
 import { loadVectorStore } from './../docs'
 
 export async function createMcpServer() {

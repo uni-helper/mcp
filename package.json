@@ -1,5 +1,5 @@
 {
-  "name": "@uni-helper/ai-tools",
+  "name": "@uni-helper/mcp",
   "type": "module",
   "version": "0.0.0",
   "packageManager": "pnpm@10.6.2",
@@ -7,12 +7,12 @@
   "author": "FliPPeDround <flippedround@qq.com>",
   "license": "MIT",
   "funding": "https://afdian.com/a/flippedround",
-  "homepage": "https://github.com/uni-helper/ai-tools#readme",
+  "homepage": "https://github.com/uni-helper/mcp#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/uni-helper/ai-tools.git"
+    "url": "git+https://github.com/uni-helper/mcp.git"
   },
-  "bugs": "https://github.com/uni-helper/ai-tools/issues",
+  "bugs": "https://github.com/uni-helper/mcp/issues",
   "keywords": [
     "uni",
     "uni-app",
@@ -20,7 +20,6 @@
     "mcp",
     "ai",
     "agent",
-    "skills",
     "miniapp"
   ],
   "sideEffects": false,
@@ -75,7 +74,6 @@
   "devDependencies": {
     "@antfu/eslint-config": "^7.0.1",
     "@antfu/utils": "^9.3.0",
-    "@clack/prompts": "^1.0.0",
     "@langchain/core": "^1.1.15",
     "@langchain/ollama": "^1.2.0",
     "@langchain/textsplitters": "^1.0.1",
