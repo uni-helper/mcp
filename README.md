@@ -25,6 +25,5 @@ pnpm add @uni-helper/mcp -D
 确保能正确构建`@uni-helper/mcp`插件
 ```yaml
 onlyBuiltDependencies:
-  - hnswlib-node
   - '@uni-helper/mcp'
 ```

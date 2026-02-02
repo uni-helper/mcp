@@ -3,27 +3,39 @@ import type { EmbeddingsInterface } from '@langchain/core/embeddings'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { env } from '@huggingface/transformers'
+import { connect } from '@lancedb/lancedb'
 import { HuggingFaceTransformersEmbeddings } from '@langchain/community/embeddings/huggingface_transformers'
-import { HNSWLib } from '@langchain/community/vectorstores/hnswlib'
+import { LanceDB } from '@langchain/community/vectorstores/lancedb'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 type VectorStoreName = 'uniapp'
 
 export async function loadVectorStore(vectorName: VectorStoreName, _embeddings?: EmbeddingsInterface) {
-  const vectorDirMap = {
-    uniapp: join(__dirname, '../', 'vectorStore', 'uniapp'),
+  const vectorMap = {
+    uniapp: {
+      dir: join(__dirname, '../../', 'vectorStore'),
+      tableName: 'uniapp_docs',
+    },
   }
 
-  // 配置 ModelScope 镜像
+  const vectorDir = vectorMap[vectorName].dir
+
+  const db = await connect(vectorDir)
+  const table = await db.openTable(vectorMap[vectorName].tableName)
+
   env.version = 'master'
   env.remoteHost = 'https://www.modelscope.cn/models'
   const embeddings = _embeddings ?? new HuggingFaceTransformersEmbeddings({
     model: 'onnx-community/Qwen3-Embedding-0.6B-ONNX',
     pretrainedOptions: {
-      dtype: 'int8', // 这个最小
-      device: 'cpu', // 只支持 CPU
+      dtype: 'int8',
+      device: 'cpu',
     } as PretrainedOptions,
   })
 
-  return await HNSWLib.load(vectorDirMap[vectorName], embeddings)
+  return new LanceDB(embeddings, {
+    table,
+    uri: vectorDir,
+    tableName: vectorMap[vectorName].tableName,
+  })
 }

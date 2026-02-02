@@ -1,26 +1,13 @@
 import { existsSync, mkdirSync } from 'node:fs'
 import { join } from 'node:path'
 import process from 'node:process'
-import { HNSWLib } from '@langchain/community/vectorstores/hnswlib'
+import { LanceDB } from '@langchain/community/vectorstores/lancedb'
 import { OllamaEmbeddings } from '@langchain/ollama'
 import { MarkdownTextSplitter } from '@langchain/textsplitters'
 import consola from 'consola'
-import { WebToMarkdownLoader } from './MDfromWebLoader'
+import { WebToMarkdownLoader } from './MDfromWebLoader.ts'
 
 async function main() {
-  // consola.start('加载模型')
-  // env.remoteHost = 'https://hf-mirror.com'
-  // const embeddings = new HuggingFaceTransformersEmbeddings({
-  //   model: 'onnx-community/Qwen3-Embedding-0.6B-ONNX',
-  //   pretrainedOptions: {
-  //     dtype: 'fp32',
-  //     device: 'cpu',
-  //   } as PretrainedOptions,
-  // })
-  // await embeddings.embedQuery('warmup')
-  // consola.success('模型加载完成')
-
-  // 也可以使用 Ollama 模型 进行嵌入
   const embeddings = new OllamaEmbeddings({
     model: 'qwen3-embedding:0.6b',
     baseUrl: 'http://localhost:11434',
@@ -43,13 +30,17 @@ async function main() {
     chunkOverlap: 300,
   })
 
-  const vectorDir = join(process.cwd(), 'vectorStore', 'uniapp')
+  const vectorDir = join(process.cwd(), 'vectorStore')
 
   if (!existsSync(vectorDir)) {
     mkdirSync(vectorDir, { recursive: true })
   }
 
-  const vectorStore = await HNSWLib.fromDocuments([], embeddings)
+  const vectorStore = await LanceDB.fromDocuments([], embeddings, {
+    uri: vectorDir,
+    tableName: 'uniapp_docs',
+    mode: 'overwrite',
+  })
 
   const BATCH_SIZE = 10
   for (let i = 0; i < allDocs.length; i += BATCH_SIZE) {
@@ -67,9 +58,6 @@ async function main() {
     consola.info(`处理批次 ${Math.min(i + BATCH_SIZE, allDocs.length)}/${allDocs.length}`)
     await vectorStore.addDocuments(docsToAdd)
   }
-
-  consola.success('文档切分完成')
-  await vectorStore.save(vectorDir)
   consola.success('向量数据库保存完成')
 }
 main()
