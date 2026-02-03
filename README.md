@@ -1,13 +1,14 @@
 # UniAPP MCP
 
-> 访问[uni-helper/skills](https://github.com/uni-helper/skills)获取`skills`。
+> 访问 [uni-helper/skills](https://github.com/uni-helper/skills) 获取 `skills`
 
 使用 `MCP + RAG` 方案来查询 uniapp 文档。
 
 ## 安装
+> 由于向量数据库及模型文件较大，npx 安装耗时较长，建议全局安装。
 
 ```bash
-pnpm add @uni-helper/mcp -D
+pnpm i @uni-helper/mcp -g
 ```
 
 ## 配置 MCP 服务器
@@ -19,11 +20,4 @@ pnpm add @uni-helper/mcp -D
     }
   }
 }
-```
-
-## 注意如果使用pnpm，请在`pnpm-workspace.yaml`中添加如下配置：
-确保能正确构建`@uni-helper/mcp`插件
-```yaml
-onlyBuiltDependencies:
-  - '@uni-helper/mcp'
 ```

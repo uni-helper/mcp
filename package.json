@@ -52,7 +52,7 @@
     "pull:repo": "node scripts/cli.ts",
     "test": "vitest",
     "prepare": "simple-git-hooks",
-    "postinstall": "node scripts/download-model.mjs && node scripts/link-global.mjs"
+    "postinstall": "node scripts/download-model.mjs"
   },
   "dependencies": {
     "@huggingface/transformers": "^3.8.1",
